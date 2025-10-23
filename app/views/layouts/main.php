@@ -9,19 +9,19 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Tus estilos (OJO: ya sin /public delante) -->
+  <!-- Tus estilos -->
   <link href="<?= $baseUrl ?>/assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg border-0 sticky-top">
+<nav class="navbar navbar-expand-lg border-0 sticky-top navbar-dark bg-transparent">
   <div class="container">
-    <!-- SOLO CAMBIO DE COLOR EN EL NOMBRE DEL BLOG -->
+    <!-- Restauramos la estructura original -->
     <a class="navbar-brand fw-bold" href="<?= $baseUrl ?>/" style="color:#f8fafc;">
       Colombia en Construcción: <span style="color:#e2e8f0;">Nuestros Cimientos</span>
     </a>
 
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -33,7 +33,7 @@
           <a class="nav-link" href="<?= $baseUrl ?>/">Inicio</a>
         </li>
 
-        <!-- Secciones (filtro por categoría) -->
+        <!-- Secciones -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Secciones</a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -46,7 +46,7 @@
           </ul>
         </li>
 
-        <!-- Buscador local -->
+        <!-- Buscador -->
         <li class="nav-item">
           <form class="d-flex" role="search" onsubmit="SiteSearch.run(event)">
             <input class="form-control form-control-sm me-2" id="q" type="search" placeholder="Buscar…">
@@ -80,7 +80,7 @@
 <footer class="border-top py-4 mt-5">
   <div class="container small text-secondary">
     <div class="d-flex justify-content-between">
-      <span>© <?= date('Y') ?> Colombia en Construcción: Nuestros Cimientos · Minimal MVC</span>
+      <span>© <?= date('Y') ?> Colombia en Construcción: Nuestros Cimientos · Minimal MVC · Santiago Solano Virgüez</span>
       <span>Hecho con PHP · Bootstrap 5 · Canvas · SVG</span>
     </div>
   </div>
@@ -88,8 +88,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>window.BASE_URL = "<?= $baseUrl ?>";</script>
-
-<!-- Tus scripts (OJO: ya sin /public delante) -->
 <script src="<?= $baseUrl ?>/assets/js/app.js"></script>
 </body>
 </html>

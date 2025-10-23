@@ -1,8 +1,12 @@
-/* ========= Colombia_CNC – Themeable CSS ========= */
+/* ========= Colombia_CNC – Responsive Theme =========
+   - Mobile-first
+   - Sin cambios de HTML
+   - Optimiza legibilidad y rejillas en XS / SM / MD / LG / XL
+==================================================== */
 
-/* Paleta base (se usa si no hay data-theme o como fallback) */
+/* ===== Variables base (tema actual) ===== */
 :root{
-  /* colores clave */
+  /* colores clave (se sobreescriben por data-theme en app.js) */
   --accent: #7c3aed;
   --accent-2: #06b6d4;
   --fg: #e9eefb;
@@ -17,43 +21,38 @@
 
   /* superficies */
   --surface: #0f1629;
+
+  /* Tipografía */
+  --fs-base: clamp(14px, 1.6vw, 16px);
+  --fs-small: clamp(12px, 1.3vw, 14px);
+  --fs-h1: clamp(24px, 5vw, 40px);
+  --fs-h2: clamp(20px, 4vw, 28px);
+  --fs-h3: clamp(18px, 3.5vw, 22px);
+
+  /* Radios */
+  --radius-md: 16px;
+  --radius-lg: 24px;
 }
 
-/* ===== THEMES ===== */
-/* V = Violeta (default) */
+/* ===== THEMES (desde los botones V/E/C/A) ===== */
 html[data-theme="violeta"]{
-  --accent: #7c3aed;
-  --accent-2: #06b6d4;
-  --bg-g1: #18203b;
-  --bg-g2: #10243e;
-  --bg-base: #0b0f1a;
+  --accent:#7c3aed; --accent-2:#06b6d4;
+  --bg-g1:#18203b; --bg-g2:#10243e; --bg-base:#0b0f1a;
 }
-/* E = Esmeralda */
 html[data-theme="esmeralda"]{
-  --accent: #10b981;
-  --accent-2: #22c55e;
-  --bg-g1: #06351f;
-  --bg-g2: #0b2a20;
-  --bg-base: #071713;
+  --accent:#10b981; --accent-2:#22c55e;
+  --bg-g1:#06351f; --bg-g2:#0b2a20; --bg-base:#071713;
 }
-/* C = Coral */
 html[data-theme="coral"]{
-  --accent: #f97316;
-  --accent-2: #fb7185;
-  --bg-g1: #33130e;
-  --bg-g2: #2a1422;
-  --bg-base: #120b0d;
+  --accent:#f97316; --accent-2:#fb7185;
+  --bg-g1:#33130e; --bg-g2:#2a1422; --bg-base:#120b0d;
 }
-/* A = Azul */
 html[data-theme="azul"]{
-  --accent: #2563eb;
-  --accent-2: #06b6d4;
-  --bg-g1: #0f1f3a;
-  --bg-g2: #0b1630;
-  --bg-base: #070c18;
+  --accent:#2563eb; --accent-2:#06b6d4;
+  --bg-g1:#0f1f3a; --bg-g2:#0b1630; --bg-base:#070c18;
 }
 
-/* ===== Base ===== */
+/* ===== Reset / Base ===== */
 *{ box-sizing:border-box }
 html,body{ height:100% }
 body{
@@ -62,8 +61,14 @@ body{
     radial-gradient(900px 600px at 100% 0%, var(--bg-g2) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg-base) 0%, #05070d 100%);
   color:var(--fg);
-  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--fs-base);
+  line-height: 1.5;
 }
+
+/* Imágenes, video y canvas responsivos */
+img, video, canvas, svg{ max-width:100%; height:auto; display:block }
 
 /* ===== Navbar ===== */
 .navbar{
@@ -71,14 +76,29 @@ body{
   backdrop-filter:saturate(140%) blur(8px);
   -webkit-backdrop-filter:saturate(140%) blur(8px);
   border:1px solid var(--border)!important;
-  margin:12px auto; border-radius:16px; width:min(1200px,95%);
+  margin:12px auto;
+  border-radius:12px;
+  width:min(1200px, 96%);
 }
-.navbar-brand{ letter-spacing:.2px; font-weight:800 }
-.nav-link{ color:var(--muted)!important }
-.nav-link:hover{ color:var(--fg)!important }
+.navbar-brand{
+  letter-spacing:.2px; font-weight:800;
+  font-size: clamp(16px, 3.5vw, 20px);
+  white-space: normal;           /* permite salto en el título largo */
+  line-height: 1.15;
+}
+.nav-link{ color:var(--muted)!important; }
+.nav-link:hover{ color:var(--fg)!important; }
 
-/* ===== Container / Cards ===== */
+/* Toggler más visible en móvil */
+.navbar-toggler{
+  border:1px solid var(--border);
+}
+.navbar-toggler:focus{ box-shadow: 0 0 0 .15rem rgba(255,255,255,.2) }
+
+/* ===== Contenedores ===== */
 .container{ width:min(1200px, 92%) }
+
+/* ===== Tarjetas / bloques ===== */
 .card{
   background: var(--card)!important;
   border:1px solid var(--border)!important;
@@ -86,13 +106,14 @@ body{
   border-radius:18px;
   overflow:hidden;
 }
-.hover-card{ transition:.25s ease }
+.card-body{ padding: clamp(12px, 2.5vw, 20px) }
+.hover-card{ transition: transform .25s ease, box-shadow .25s ease }
 .hover-card:hover{
   transform: translateY(-4px);
   box-shadow: 0 30px 80px rgba(0,0,0,.35), 0 0 0 1px var(--border) inset;
 }
 
-/* ===== Buttons / Inputs ===== */
+/* ===== Botones e inputs ===== */
 .btn-dark{
   --bs-btn-bg: linear-gradient(135deg, var(--accent), var(--accent-2));
   --bs-btn-border-color: transparent;
@@ -101,7 +122,7 @@ body{
   transition: box-shadow .2s ease, transform .2s ease;
   color:#fff;
 }
-.btn-dark:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,58,237,.35) }
+.btn-dark:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 45%, transparent) }
 .btn-outline-dark{ color:var(--fg); border-color:var(--border); }
 
 .form-control, .form-select{
@@ -112,23 +133,72 @@ body{
   box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
-/* ===== Hero / text ===== */
-.page-hero{ padding:40px 0 8px; }
+/* ===== Tipografías héroe / títulos ===== */
+.page-hero{ padding: 32px 0 8px; }
 .page-hero .display-5{
+  font-size: var(--fs-h1);
   background: linear-gradient(90deg, #fff, #c7d2fe 40%, #a5f3fc);
   -webkit-background-clip:text; background-clip:text; color: transparent;
 }
-.lead{ color:var(--muted) }
+.lead{ color:var(--muted); font-size: clamp(14px, 2.5vw, 18px) }
 
-/* ===== Poster avanzado utilidades (si se usa) ===== */
-#infographicSVG{ filter: drop-shadow(0 10px 40px rgba(0,0,0,.35)); }
+/* ===== Rejilla auto-ajustable para listados ===== */
+.grid-autofit{
+  display:grid; gap: clamp(12px, 2.8vw, 20px);
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+/* ===== Componentes visuales ===== */
+
+/* Infografía (SVG) */
+#infographicSVG{
+  margin-inline:auto;
+  filter: drop-shadow(0 10px 40px rgba(0,0,0,.35));
+}
 .legend-dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
 
+/* Poster básico (fallback si no usas el avanzado) */
 .poster-wrap{ display:flex; justify-content:center; }
 .poster{
-  width:min(860px, 100%); aspect-ratio: 3/2; position:relative; overflow:hidden;
+  width:100%; max-width:860px; aspect-ratio: 3/2; position:relative; overflow:hidden;
   border-radius:28px; border:1px solid var(--border);
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, transparent), rgba(255,255,255,.05));
+}
+
+/* Poster avanzado (de tu componente) */
+.poster-adv{ border-radius: var(--radius-lg); }
+.poster-adv .content{ padding: clamp(16px, 4vw, 48px); }
+.poster-adv .title{ font-size: clamp(22px, 4.5vw, 52px); }
+.poster-adv .subtitle{ font-size: clamp(14px, 2vw, 17px); }
+.poster-adv .quote{ font-size: clamp(14px, 2.2vw, 20px); }
+
+/* Entrevista avanzada */
+section .accordion-button{ font-size: clamp(14px, 2.6vw, 16px) }
+section .accordion-body{ font-size: clamp(13px, 2.3vw, 15px) }
+
+/* Canvas: que nunca se desborde */
+canvas{
+  background: radial-gradient(120% 100% at 100% 0%, rgba(6,182,212,.06), transparent 60%), #0b1223;
+  border:1px solid #1f2a44!important;
+  border-radius:18px;
+  width: 100% !important;    /* ocupa ancho contenedor */
+  height: auto !important;   /* respeta proporción */
+}
+
+/* Vídeo responsive dentro de contenedor */
+.video-fluid, .poster-adv video{
+  width:100%; height:auto; display:block; border-radius:16px;
+}
+
+/* ===== Sticky actions (barra de botones del formulario) ===== */
+.sticky-actions{
+  position: sticky; bottom: 0;
+  display: flex; gap: .75rem;
+  padding: .85rem 1rem;
+  background: linear-gradient(180deg, rgba(11,15,26,.65), rgba(11,15,26,.85));
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  z-index: 5;
 }
 
 /* ===== Footer ===== */
@@ -138,9 +208,162 @@ footer{
   border-top:1px dashed var(--border)!important;
 }
 
-/* ===== Sticky form actions ===== */
-.sticky-actions{
-  position: sticky; bottom: 0; display:flex; gap:.75rem;
-  padding:.85rem 1rem; background: linear-gradient(180deg, rgba(11,15,26,.65), rgba(11,15,26,.85));
-  border-top:1px solid var(--border); backdrop-filter: blur(6px);
+/* ============ Breakpoints ============ */
+
+/* XS — teléfonos pequeños */
+@media (max-width: 360px){
+  .navbar{ width: 98%; border-radius:10px; }
+  .navbar-brand{ font-size: 15px }
+  .btn, .btn-sm{ font-size: 12px }
+  .form-control{ font-size: 13px }
+}
+
+/* SM — ≤576px */
+@media (max-width: 576px){
+  .navbar{ margin:8px auto }
+  .navbar .container{ padding-inline: 8px }
+  .navbar-brand{ letter-spacing:.1px }
+  .page-hero{ padding: 20px 0 6px }
+
+  .grid-autofit{ gap: 12px }
+  .card-body{ padding: 12px }
+  .poster{ border-radius: 20px }
+  .poster-adv{ border-radius: 20px }
+  .sticky-actions{ padding:.7rem .75rem; gap:.5rem }
+  .sticky-actions .btn{ padding:.45rem .7rem }
+}
+
+/* MD — ≤768px (tabletas vertical) */
+@media (max-width: 768px){
+  .navbar-nav{ gap: 6px }
+  .nav-link{ padding-inline: .35rem }
+  .container{ width: min(100%, 94%) }
+  .page-hero .display-5{ line-height: 1.1 }
+  .hover-card:hover{ transform: translateY(-2px) }
+
+  /* Distribución entrevista / poster */
+  .poster-adv .grid{ display:block !important }
+  .poster-adv .chart{
+    gap:.4rem; justify-content:center; flex-wrap:wrap;
+  }
+  .poster-adv .bar-v{ width: 22px; height: 120px; }
+}
+
+/* LG — ≥992px (escritorio) */
+@media (min-width: 992px){
+  /* Anchos más comedidos en textos largos */
+  .prose, article.post{ max-width: 900px; margin-inline:auto }
+}
+
+/* XL — pantallas grandes */
+@media (min-width: 1400px){
+  .container{ width: 1200px }
+}
+
+/* ===== Ajustes específicos de NAVBAR & OFFCANVAS ===== */
+@media (max-width: 991.98px){
+  /* El navbar ocupa todo el ancho del viewport en móvil */
+  .navbar{
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    border-left: none!important;
+    border-right: none!important;
+  }
+  /* Offcanvas más ancho en móviles (85% del viewport) */
+  #mainNav{ --bs-offcanvas-width: 85vw; }
+  #mainNav .offcanvas-header{ border-bottom: 1px solid rgba(255,255,255,.08); }
+  #mainNav .nav-link,
+  #mainNav .dropdown-item{ padding: .6rem .25rem; font-size: 1rem; }
+}
+
+/* ===== Utilidades ===== */
+.text-balance{ text-wrap: balance; }
+.text-pretty{ text-wrap: pretty; }
+
+/* ====== FIX FINAL: posts visibles por encima de overlays ====== */
+
+/* El contenido (posts) siempre por encima */
+main, .content, .post-list, article.post {
+  position: relative;
+  z-index: 10;
+}
+
+/* Elementos decorativos atrás */
+.hero, .banner, .stage, .poster, .poster-adv, .canvas, #infographicSVG, canvas {
+  position: relative;
+  z-index: 0;
+}
+
+/* Pseudoelementos/overlays que no bloqueen */
+.hero::before, .hero::after,
+.banner::before, .banner::after,
+.poster::before, .poster::after,
+.poster-adv::before, .poster-adv::after,
+.overlay, .backdrop, .mask {
+  z-index: -1 !important;
+  pointer-events: none !important;
+  /* content: none !important;  <- activa esta línea si alguna máscara persiste */
+}
+
+/* Evitar recortes involuntarios */
+.container, main, .content { overflow: visible !important; }
+
+/* Dropdowns del navbar por encima */
+.navbar { z-index: 1050; }
+.dropdown-menu { z-index: 1060; }
+
+/* Por si hay shapes con blend que “desaparecen” texto */
+[class*="blob"], [class*="shape"] { mix-blend-mode: normal !important; }
+
+/* ===== Ajuste visual para posts individuales ===== */
+article.post, .post-view, .poster-wrap, .poster-adv, #infographicSVG, canvas {
+  max-width: min(100%, 1400px);
+  margin-inline: auto;
+}
+
+/* Centrar y dar aire visual */
+article.post, .poster-adv, .poster-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Canvas o animaciones: ocupar bien el ancho disponible */
+.post-view canvas {
+  display: block;
+  margin: 0 auto;
+  width: 100% !important;
+  max-width: 1200px;
+  height: auto !important;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: radial-gradient(120% 100% at 100% 0%, rgba(6,182,212,.06), transparent 60%), #0b1223;
+}
+
+/* Poster e infografía: ancho visual consistente */
+.poster-adv, #infographicSVG {
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,.05));
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+
+/* Encabezados del post */
+.page-hero .display-5, .poster-adv .title {
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: .5em;
+}
+
+/* Mejora responsiva */
+@media (max-width: 768px) {
+  .poster-adv, #infographicSVG, canvas {
+    max-width: 100%;
+    border-radius: 16px;
+  }
 }
