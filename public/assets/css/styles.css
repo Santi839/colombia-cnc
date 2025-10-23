@@ -1,0 +1,146 @@
+/* ========= Colombia_CNC – Themeable CSS ========= */
+
+/* Paleta base (se usa si no hay data-theme o como fallback) */
+:root{
+  /* colores clave */
+  --accent: #7c3aed;
+  --accent-2: #06b6d4;
+  --fg: #e9eefb;
+  --muted: #9aa4b2;
+  --border: rgba(255,255,255,.12);
+  --card: rgba(255,255,255,.06);
+
+  /* fondos (capas de gradiente) */
+  --bg-g1: #18203b;
+  --bg-g2: #10243e;
+  --bg-base: #0b0f1a;
+
+  /* superficies */
+  --surface: #0f1629;
+}
+
+/* ===== THEMES ===== */
+/* V = Violeta (default) */
+html[data-theme="violeta"]{
+  --accent: #7c3aed;
+  --accent-2: #06b6d4;
+  --bg-g1: #18203b;
+  --bg-g2: #10243e;
+  --bg-base: #0b0f1a;
+}
+/* E = Esmeralda */
+html[data-theme="esmeralda"]{
+  --accent: #10b981;
+  --accent-2: #22c55e;
+  --bg-g1: #06351f;
+  --bg-g2: #0b2a20;
+  --bg-base: #071713;
+}
+/* C = Coral */
+html[data-theme="coral"]{
+  --accent: #f97316;
+  --accent-2: #fb7185;
+  --bg-g1: #33130e;
+  --bg-g2: #2a1422;
+  --bg-base: #120b0d;
+}
+/* A = Azul */
+html[data-theme="azul"]{
+  --accent: #2563eb;
+  --accent-2: #06b6d4;
+  --bg-g1: #0f1f3a;
+  --bg-g2: #0b1630;
+  --bg-base: #070c18;
+}
+
+/* ===== Base ===== */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  background:
+    radial-gradient(1200px 800px at 10% -10%, var(--bg-g1) 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, var(--bg-g2) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-base) 0%, #05070d 100%);
+  color:var(--fg);
+  font-synthesis-weight: none;
+}
+
+/* ===== Navbar ===== */
+.navbar{
+  background: rgba(255,255,255,.04)!important;
+  backdrop-filter:saturate(140%) blur(8px);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);
+  border:1px solid var(--border)!important;
+  margin:12px auto; border-radius:16px; width:min(1200px,95%);
+}
+.navbar-brand{ letter-spacing:.2px; font-weight:800 }
+.nav-link{ color:var(--muted)!important }
+.nav-link:hover{ color:var(--fg)!important }
+
+/* ===== Container / Cards ===== */
+.container{ width:min(1200px, 92%) }
+.card{
+  background: var(--card)!important;
+  border:1px solid var(--border)!important;
+  color:var(--fg);
+  border-radius:18px;
+  overflow:hidden;
+}
+.hover-card{ transition:.25s ease }
+.hover-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(0,0,0,.35), 0 0 0 1px var(--border) inset;
+}
+
+/* ===== Buttons / Inputs ===== */
+.btn-dark{
+  --bs-btn-bg: linear-gradient(135deg, var(--accent), var(--accent-2));
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-bg: linear-gradient(135deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 0 0 rgba(124,58,237,.0);
+  transition: box-shadow .2s ease, transform .2s ease;
+  color:#fff;
+}
+.btn-dark:hover{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124,58,237,.35) }
+.btn-outline-dark{ color:var(--fg); border-color:var(--border); }
+
+.form-control, .form-select{
+  background:#0b1223; color:var(--fg); border-color:#23304d;
+}
+.form-control:focus, .form-select:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 .25rem color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* ===== Hero / text ===== */
+.page-hero{ padding:40px 0 8px; }
+.page-hero .display-5{
+  background: linear-gradient(90deg, #fff, #c7d2fe 40%, #a5f3fc);
+  -webkit-background-clip:text; background-clip:text; color: transparent;
+}
+.lead{ color:var(--muted) }
+
+/* ===== Poster avanzado utilidades (si se usa) ===== */
+#infographicSVG{ filter: drop-shadow(0 10px 40px rgba(0,0,0,.35)); }
+.legend-dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+.poster-wrap{ display:flex; justify-content:center; }
+.poster{
+  width:min(860px, 100%); aspect-ratio: 3/2; position:relative; overflow:hidden;
+  border-radius:28px; border:1px solid var(--border);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, transparent), rgba(255,255,255,.05));
+}
+
+/* ===== Footer ===== */
+footer{
+  background: transparent!important;
+  color:var(--muted);
+  border-top:1px dashed var(--border)!important;
+}
+
+/* ===== Sticky form actions ===== */
+.sticky-actions{
+  position: sticky; bottom: 0; display:flex; gap:.75rem;
+  padding:.85rem 1rem; background: linear-gradient(180deg, rgba(11,15,26,.65), rgba(11,15,26,.85));
+  border-top:1px solid var(--border); backdrop-filter: blur(6px);
+}
