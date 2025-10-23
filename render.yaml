@@ -2,8 +2,7 @@ services:
   - type: web
     name: colombia-cnc
     env: docker
-    rootDir: .
-    dockerfilePath: ./Dockerfile
     plan: free
+    region: oregon
     healthCheckPath: /
     autoDeploy: true
