@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: colombia-cnc
+    env: php
+    plan: free
+    rootDir: .        # o "public" si tu index.php está allí
+    buildCommand: ""  # vacío
+    startCommand: php -S 0.0.0.0:$PORT server.php
+    autoDeploy: true
