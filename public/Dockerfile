@@ -1,9 +1,11 @@
+# Dockerfile (raíz del repo)
 FROM php:8.2-apache
+
+# Habilita mod_rewrite para rutas amigables
 RUN a2enmod rewrite
 
-# Copia solo la carpeta public al docroot
-COPY public/ /var/www/html/
-# Si tienes assets fuera de public, copia lo necesario:
-# COPY assets/ /var/www/html/assets
+# Copia TODO el proyecto al docroot de Apache
+COPY . /var/www/html/
 
+# (Opcional pero recomendado) permisos
 RUN chown -R www-data:www-data /var/www/html

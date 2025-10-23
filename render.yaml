@@ -1,9 +1,9 @@
 services:
   - type: web
     name: colombia-cnc
-    env: php
+    env: docker
+    rootDir: .
+    dockerfilePath: ./Dockerfile
     plan: free
-    rootDir: .        # o "public" si tu index.php está allí
-    buildCommand: ""  # vacío
-    startCommand: php -S 0.0.0.0:$PORT server.php
+    healthCheckPath: /
     autoDeploy: true
