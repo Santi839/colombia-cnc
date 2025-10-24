@@ -1,27 +1,27 @@
 # Dockerfile
 FROM php:8.2-apache
 
-# Extensiones mínimas comunes (ajusta si necesitas otras)
+# 1) Extensiones necesarias (pgsql/pdo_pgsql, zip, intl si hace falta)
 RUN apt-get update && apt-get install -y \
-    libzip-dev zip unzip git \
- && docker-php-ext-install pdo pdo_mysql zip \
- && a2enmod rewrite
+    libpq-dev libzip-dev libicu-dev \
+ && docker-php-ext-install pdo_pgsql pgsql zip intl \
+ && rm -rf /var/lib/apt/lists/*
 
-# DocumentRoot -> /public
+# 2) Habilitar mod_rewrite (URLs amigables)
+RUN a2enmod rewrite
+
+# 3) Ajustar DocumentRoot a /var/www/html/public
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
-    sed -ri -e 's!Directory /var/www/!Directory /var/www/html/!g' /etc/apache2/apache2.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/000-default.conf \
+ && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/../!g' \
+    /etc/apache2/apache2.conf
 
-# Copia el proyecto completo (incluye /public)
-COPY . /var/www/html
+# 4) Copiar proyecto
+COPY . /var/www/html/
 
-# Permisos (especialmente storage/)
-RUN chown -R www-data:www-data /var/www/html && \
-    mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache || true && \
-    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache || true
+# 5) Permisos mínimos
+RUN chown -R www-data:www-data /var/www/html
 
-# Render usa $PORT. Cambiamos el puerto de Apache en runtime.
-ENV APACHE_LISTEN_PORT=8080
-RUN sed -ri -e 's!Listen 80!Listen ${APACHE_LISTEN_PORT}!g' /etc/apache2/ports.conf
-EXPOSE 8080
-CMD [ "bash", "-lc", "if [ -n \"$PORT\" ]; then sed -ri -e \"s!Listen ${APACHE_LISTEN_PORT}!Listen ${PORT}!g\" /etc/apache2/ports.conf; fi && apache2-foreground" ]
+# 6) Exponer el puerto estándar
+EXPOSE 80
