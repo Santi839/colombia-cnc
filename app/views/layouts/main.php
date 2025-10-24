@@ -17,7 +17,7 @@
 <nav class="navbar navbar-expand-lg border-0 sticky-top navbar-dark bg-transparent">
   <div class="container">
     <!-- Restauramos la estructura original -->
-    <a class="navbar-brand fw-bold" href="<?= $baseUrl ?>/" style="color:#f8fafc;">
+    <a class="navbar-brand fw-bold" href="<?= $baseUrl ?>" style="color:#f8fafc;">
       Colombia en Construcción: <span style="color:#e2e8f0;">Nuestros Cimientos</span>
     </a>
 
@@ -30,19 +30,19 @@
 
         <!-- Inicio -->
         <li class="nav-item">
-          <a class="nav-link" href="<?= $baseUrl ?>/">Inicio</a>
+          <a class="nav-link" href="<?= $baseUrl ?>">Inicio</a>
         </li>
 
         <!-- Secciones -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Secciones</a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Población">Población</a></li>
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Territorio">Territorio</a></li>
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Poder%20y%20autoridad">Poder y autoridad</a></li>
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Soberanía">Soberanía</a></li>
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Constitución">Constitución</a></li>
-            <li><a class="dropdown-item" href="<?= $baseUrl ?>/posts?cat=Instituciones">Instituciones</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Población">Población</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Territorio">Territorio</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Poder%20y%20autoridad">Poder y autoridad</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Soberanía">Soberanía</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Constitución">Constitución</a></li>
+            <li><a class="dropdown-item" href="<?= $baseUrl ?>posts?cat=Instituciones">Instituciones</a></li>
           </ul>
         </li>
 
@@ -64,7 +64,7 @@
 
         <!-- CTA -->
         <li class="nav-item ms-lg-2">
-          <a class="btn btn-dark btn-sm" href="<?= $baseUrl ?>/posts/create">Nuevo contenido</a>
+          <a class="btn btn-dark btn-sm" href="<?= $baseUrl ?>posts/create">Nuevo contenido</a>
         </li>
       </ul>
     </div>

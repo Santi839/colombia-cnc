@@ -12,7 +12,7 @@
       <div class="card shadow-sm border-0">
         <div class="card-body p-5 text-center text-secondary">
           <p class="mb-2">Aún no hay publicaciones.</p>
-          <a class="btn btn-dark" href="<?= $baseUrl ?>/posts/create">Crear la primera</a>
+          <a class="btn btn-dark" href="<?= $baseUrl ?>posts/create">Crear la primera</a>
         </div>
       </div>
     </div>
