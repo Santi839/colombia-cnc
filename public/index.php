@@ -12,9 +12,9 @@ $config = require dirname(__DIR__) . '/config/config.php';
 
 $router = new Router();
 $router->get('/', [HomeController::class, 'index']);
-$router->get('/posts', [PostController::class, 'index']);
-$router->get('/posts/create', [PostController::class, 'create']);
-$router->post('/posts/create', [PostController::class, 'create']);
-$router->get('/posts/show', [PostController::class, 'show']);
+$router->get('posts', [PostController::class, 'index']);
+$router->get('posts/create', [PostController::class, 'create']);
+$router->post('posts/create', [PostController::class, 'create']);
+$router->get('posts/show', [PostController::class, 'show']);
 
 $router->dispatch($config['base_url']);
