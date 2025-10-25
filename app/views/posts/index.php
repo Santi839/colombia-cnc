@@ -2,7 +2,7 @@
 <div class="list-group shadow-sm">
   <?php foreach ($posts as $p): ?>
     <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-       href="<?= $baseUrl ?>/posts/show?id=<?= htmlspecialchars($p['id']) ?>">
+       href="<?= $baseUrl ?>posts/show?id=<?= htmlspecialchars($p['id']) ?>">
       <span>
         <span class="badge bg-dark-subtle text-dark me-2"><?= htmlspecialchars($p['category']) ?></span>
         <?= htmlspecialchars($p['title']) ?>

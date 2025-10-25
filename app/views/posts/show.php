@@ -79,5 +79,5 @@ $componentsDir = __DIR__ . DIRECTORY_SEPARATOR . '_components';
     <?php endif; ?>
   </section>
 
-  <a class="btn btn-outline-dark btn-sm" href="<?= $baseUrl ?>/">Volver</a>
+  <a class="btn btn-outline-dark btn-sm" href="<?= $baseUrl ?>">Volver</a>
 </article>
