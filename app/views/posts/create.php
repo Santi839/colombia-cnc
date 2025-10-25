@@ -4,7 +4,7 @@
 ?>
 <h1 class="h4 fw-semibold mb-4">Nuevo contenido</h1>
 
-<form method="post" action="<?= $baseUrl ?>/posts/create" class="card shadow-sm border-0 overflow-hidden">
+<form method="post" action="<?= $baseUrl ?>posts/create" class="card shadow-sm border-0 overflow-hidden">
   <div class="card-body p-4">
     <div class="row g-3">
       <div class="col-md-6">
@@ -55,7 +55,7 @@
   <!-- Barra de acciones fija -->
   <div class="card-footer bg-transparent p-0">
     <div class="sticky-actions d-flex justify-content-between align-items-center">
-      <a class="btn btn-outline-dark" href="<?= $baseUrl ?>/">Cancelar</a>
+      <a class="btn btn-outline-dark" href="<?= $baseUrl ?>">Cancelar</a>
       <button type="submit" class="btn btn-dark">Publicar</button>
     </div>
   </div>
