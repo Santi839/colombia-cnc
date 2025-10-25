@@ -18,7 +18,7 @@ class PostController extends Controller {
                 'content' => $_POST['content'] ?? '',
             ];
             $post = $postModel->create($payload);
-            return $this->redirect('/posts/show?id='.$post['id']);
+            return $this->redirect('posts/show?id='.$post['id']);
         }
         $this->view('posts/create');
     }
