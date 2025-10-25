@@ -18,7 +18,7 @@
     </div>
   <?php else: foreach ($posts as $p): ?>
     <div class="col-12 col-md-6 col-lg-4">
-      <a class="card h-100 shadow-sm border-0 hover-card text-reset text-decoration-none" href="<?= $baseUrl ?>/posts/show?id=<?= htmlspecialchars($p['id']) ?>">
+      <a class="card h-100 shadow-sm border-0 hover-card text-reset text-decoration-none" href="<?= $baseUrl ?>posts/show?id=<?= htmlspecialchars($p['id']) ?>">
         <div class="card-body">
           <span class="badge rounded-pill bg-dark-subtle text-dark mb-2"><?= htmlspecialchars($p['category']) ?></span>
           <h3 class="h5 fw-semibold mb-2"><?= htmlspecialchars($p['title']) ?></h3>
