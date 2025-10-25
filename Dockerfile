@@ -11,13 +11,17 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # 3) Ajustar DocumentRoot a /var/www/html/public
+#    Y PERMITIR .HTACCESS (AllowOverride All)
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/sites-available/000-default.conf \
  && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/../!g' \
-    /etc/apache2/apache2.conf
+    /etc/apache2/apache2.conf \
+ && sed -ri -e 's/AllowOverride None/AllowOverride All/g' \
+    /etc/apache2/sites-available/000-default.conf
 
 # 4) Copiar proyecto
+# La barra al final de /var/www/html/ es CRÍTICA
 COPY . /var/www/html/
 
 # 5) Permisos mínimos
@@ -25,3 +29,4 @@ RUN chown -R www-data:www-data /var/www/html
 
 # 6) Exponer el puerto estándar
 EXPOSE 80
+
